@@ -1,4 +1,6 @@
 import express, { Express, NextFunction, Request, Response, Router } from 'express';
+import { ENDPOINTS } from '../controllers/endpoints.controller';
+import { IHttpType } from '../interfaces/controller.interface';
 
 class ExpressApplication {
 
@@ -10,6 +12,9 @@ class ExpressApplication {
     this.router = express.Router();
 
     this.app.use(express.json());
+
+    this.addEndpoints();
+    this.app.use(this.router);
   }
 
   public async listen(port: number): Promise<void> {
@@ -22,17 +27,45 @@ class ExpressApplication {
     this.app.use(func);
   }
 
-  public addControllers(controllers: any[]) {
-    for (const controller of controllers) {
-      if (controller.get) {
-        this.router.get(controller.get.url,
+  private addEndpoints() {
+    for (const endpoint of ENDPOINTS) {
+      if (endpoint.http_type === IHttpType.HTTP_GET) {
+        this.router.get(endpoint.url,
           async (req: Request, res: Response, _next: NextFunction) => {
-            await controller.getData(req.query, req.body);
-            res.end();
+            console.log('req.query: ', req.query);
+            console.log('req.body: ', req.body);
+            res.status(200);
+            res.send(endpoint.data);
+          });
+      }
+      if (endpoint.http_type === IHttpType.HTTP_POST) {
+        this.router.post(endpoint.url,
+          async (req: Request, res: Response, _next: NextFunction) => {
+            console.log('req.query: ', req.query);
+            console.log('req.body: ', req.body);
+            res.status(200);
+            res.send(endpoint.data);
+          });
+      }
+      if (endpoint.http_type === IHttpType.HTTP_PUT) {
+        this.router.put(endpoint.url,
+          async (req: Request, res: Response, _next: NextFunction) => {
+            console.log('req.query: ', req.query);
+            console.log('req.body: ', req.body);
+            res.status(200);
+            res.send(endpoint.data);
+          });
+      }
+      if (endpoint.http_type === IHttpType.HTTP_DELETE) {
+        this.router.delete(endpoint.url,
+          async (req: Request, res: Response, _next: NextFunction) => {
+            console.log('req.query: ', req.query);
+            console.log('req.body: ', req.body);
+            res.status(200);
+            res.send(endpoint.data);
           });
       }
     }
-    this.app.use(this.router);
   }
 }
 
