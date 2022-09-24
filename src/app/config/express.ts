@@ -38,7 +38,7 @@ class ExpressApplication {
             //this.logger.info(`URL: ${endpoint.url}\nreq.query:\n${JSON.stringify(req.query, null, 4)}\nreq.body:\n${JSON.stringify(req.body, null, 4)}`);
             this.logger.info(`URL: ${endpoint.url} - req.query: ${JSON.stringify(req.query)} - req.body: ${JSON.stringify(req.body)}`);
             res.status(200);
-            res.send(endpoint.data);
+            res.send(JSON.parse(endpoint.data));
           });
       }
       if (endpoint.http_type === IHttpType.HTTP_POST) {
@@ -46,7 +46,7 @@ class ExpressApplication {
           async (req: Request, res: Response, _next: NextFunction) => {
             this.logger.info(`URL: ${endpoint.url} - req.query: ${JSON.stringify(req.query)} - req.body: ${JSON.stringify(req.body)}`);
             res.status(200);
-            res.send(endpoint.data);
+            res.send(JSON.parse(endpoint.data));
           });
       }
       if (endpoint.http_type === IHttpType.HTTP_PUT) {
@@ -54,7 +54,7 @@ class ExpressApplication {
           async (req: Request, res: Response, _next: NextFunction) => {
             this.logger.info(`URL: ${endpoint.url} - req.query: ${JSON.stringify(req.query)} - req.body: ${JSON.stringify(req.body)}`);
             res.status(200);
-            res.send(endpoint.data);
+            res.send(JSON.parse(endpoint.data));
           });
       }
       if (endpoint.http_type === IHttpType.HTTP_DELETE) {
@@ -62,7 +62,7 @@ class ExpressApplication {
           async (req: Request, res: Response, _next: NextFunction) => {
             this.logger.info(`URL: ${endpoint.url} - req.query: ${JSON.stringify(req.query)} - req.body: ${JSON.stringify(req.body)}`);
             res.status(200);
-            res.send(endpoint.data);
+            res.send(JSON.parse(endpoint.data));
           });
       }
     }
