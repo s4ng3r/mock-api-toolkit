@@ -17,7 +17,7 @@ interface IEndpoints {
     url: string;
     http_type: IHttpType,
     response_type: IResponseType,
-    data: string,
+    data: string | Object,
 }
 
 export { IEndpoints, IHttpType, IResponseType };

@@ -36,33 +36,33 @@ class ExpressApplication {
         this.router.get(endpoint.url,
           async (req: Request, res: Response, _next: NextFunction) => {
             //this.logger.info(`URL: ${endpoint.url}\nreq.query:\n${JSON.stringify(req.query, null, 4)}\nreq.body:\n${JSON.stringify(req.body, null, 4)}`);
-            this.logger.info(`URL: ${endpoint.url} - req.query: ${JSON.stringify(req.query)} - req.body: ${JSON.stringify(req.body)}`);
+            this.logger.info(`URL: ${endpoint.url}\nreq.body: ${JSON.stringify(req.body)}\nreq.query: ${JSON.stringify(req.query)}\nreq.params: ${JSON.stringify(req.params)}`);
             res.status(200);
-            res.send(JSON.parse(endpoint.data));
+            res.send(typeof(endpoint.data) === 'string' ? JSON.parse(endpoint.data) : endpoint.data);
           });
       }
       if (endpoint.http_type === IHttpType.HTTP_POST) {
         this.router.post(endpoint.url,
           async (req: Request, res: Response, _next: NextFunction) => {
-            this.logger.info(`URL: ${endpoint.url} - req.query: ${JSON.stringify(req.query)} - req.body: ${JSON.stringify(req.body)}`);
+            this.logger.info(`URL: ${endpoint.url}\nreq.body: ${JSON.stringify(req.body)}\nreq.query: ${JSON.stringify(req.query)}\nreq.params: ${JSON.stringify(req.params)}`);
             res.status(200);
-            res.send(JSON.parse(endpoint.data));
+            res.send(typeof(endpoint.data) === 'string' ? JSON.parse(endpoint.data) : endpoint.data);
           });
       }
       if (endpoint.http_type === IHttpType.HTTP_PUT) {
         this.router.put(endpoint.url,
           async (req: Request, res: Response, _next: NextFunction) => {
-            this.logger.info(`URL: ${endpoint.url} - req.query: ${JSON.stringify(req.query)} - req.body: ${JSON.stringify(req.body)}`);
+            this.logger.info(`URL: ${endpoint.url}\nreq.body: ${JSON.stringify(req.body)}\nreq.query: ${JSON.stringify(req.query)}\nreq.params: ${JSON.stringify(req.params)}`);
             res.status(200);
-            res.send(JSON.parse(endpoint.data));
+            res.send(typeof(endpoint.data) === 'string' ? JSON.parse(endpoint.data) : endpoint.data);
           });
       }
       if (endpoint.http_type === IHttpType.HTTP_DELETE) {
         this.router.delete(endpoint.url,
           async (req: Request, res: Response, _next: NextFunction) => {
-            this.logger.info(`URL: ${endpoint.url} - req.query: ${JSON.stringify(req.query)} - req.body: ${JSON.stringify(req.body)}`);
+            this.logger.info(`URL: ${endpoint.url}\nreq.body: ${JSON.stringify(req.body)}\nreq.query: ${JSON.stringify(req.query)}\nreq.params: ${JSON.stringify(req.params)}`);
             res.status(200);
-            res.send(JSON.parse(endpoint.data));
+            res.send(typeof(endpoint.data) === 'string' ? JSON.parse(endpoint.data) : endpoint.data);
           });
       }
     }
